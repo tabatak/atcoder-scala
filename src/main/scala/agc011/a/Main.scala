@@ -2,7 +2,7 @@ package agc011.a
 
 object Main {
   def main(args: Array[String]): Unit = {
-    solve
+    solve2
   }
 
   def solve(): Unit = {
@@ -20,6 +20,23 @@ object Main {
         g = t + k
       }else{
         num += 1
+      }
+    }
+
+    println(count)
+  }
+
+  def solve2(): Unit = {
+    val sc = new java.util.Scanner(System.in)
+    val n, c, k = sc.nextInt
+    var list = Array.fill(n)(sc.nextInt).sorted
+
+    var count = 1
+    var prev = 0
+    for(i <- 0 until n) {
+      if(i - prev == c || list(i) - list(prev) > k) {
+        count += 1
+        prev = i
       }
     }
 
