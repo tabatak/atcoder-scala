@@ -1,47 +1,41 @@
 package abc096.c
 
-import scala.math._
-
 object Main {
   def main(args: Array[String]): Unit = {
-    solve2
+    solve
   }
 
   def solve(): Unit = {
     val sc = new java.util.Scanner(System.in)
-    val a, b, c, x, y = sc.nextInt
-
-    val aPrice = min(a, c * 2)
-    val bPrice = min(b, c * 2)
-    val abPrice = min(a + b, c * 2)
-    val abFlg = a != aPrice || b != bPrice || (a + b) != abPrice
-
-    val payment =
-      if (abFlg) {
-        val abPayment = abPrice * min(x, y)
-        val notAbPayment =
-          if (x == y) 0
-          else if (x < y) (y - x) * bPrice
-          else (x - y) * aPrice
-        abPayment + notAbPayment
-      } else {
-        x * aPrice + y * bPrice
-      }
-
-    println(payment)
-
-  }
-
-  def solve2(): Unit = {
-    val sc = new java.util.Scanner(System.in)
-    val a, b, c, x, y = sc.nextInt
-
-    var minPayment = Long.MaxValue
-    for (abNum <- 0 until max(x, y) * 2) {
-      val payment = (c * 2 * abNum) + (a * max(0, x - abNum)) + b * max(0, y - abNum)
-      minPayment = min(minPayment, payment)
+    val h, w = sc.nextInt
+    sc.nextLine
+    val s = new Array[Array[Char]](h)
+    for (i <- 0 until h) {
+      s(i) = sc.nextLine.toCharArray
     }
-    println(minPayment)
 
+    // 上下左右
+    val DI = Array(-1, 0, 1, 0)
+    val DJ = Array(0, -1, 0, 1)
+
+    var ans = true
+    for (si <- 0 until h; sj <- 0 until w) {
+      if (s(si)(sj) == '#') {
+        // 自身が#ならば、周囲に#があるかをチェック
+        var count = 0
+        for (i <- 0 until 4) {
+          val ni = si + DI(i)
+          val nj = sj + DJ(i)
+          if (
+            ((ni >= 0 && ni < h) && (nj >= 0 && nj < w)) // 枠内に収まる
+              && s(ni)(nj) == '#' // 到達不可能マス
+          ) {
+            count += 1
+          }
+        }
+        if (count == 0) ans = false
+      }
+    }
+    println(if (ans) "Yes" else "No")
   }
 }
