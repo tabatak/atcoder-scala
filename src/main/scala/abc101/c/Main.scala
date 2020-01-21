@@ -9,10 +9,9 @@ object Main {
     // ここの数え方を考える
     var tmp = x
     var count = 0
-    while (tmp != 0) {
-      println(tmp)
+    while (tmp > 0) {
       count += 1
-      tmp = tmp / divisor
+      tmp = tmp - divisor
     }
     count
   }
