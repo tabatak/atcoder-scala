@@ -5,7 +5,6 @@ object Main {
     solve
   }
 
-  // 処理の方法はわかるけれど、全然整理できたコードにならない。。
   def solve(): Unit = {
     val sc = new java.util.Scanner(System.in)
     val n = sc.nextInt
@@ -23,34 +22,27 @@ object Main {
       for (y <- 0 to 100) {
         val ret = check(x, y, n, xs, ys, hs)
         if (ret._1) {
-          result = (x, y, ret._2)
+          println(x + " " + y + " " + ret._2)
+          return
         }
-
       }
     }
 
-    println(result._1 + " " + result._2 + " " + result._3)
   }
 
   private def check(x: Int, y: Int, n: Int, xs: Array[Long], ys: Array[Long], hs: Array[Long]): (Boolean, Long) = {
-    var height = -1L
-    var flg = false
     var index = 0
-    while (!flg && index < n) {
-      if (height == -1 && hs(index) != 0) {
-        //高さを確定してみる！
-        height = (x - xs(index)).abs + (y - ys(index)).abs
-        println("height = " + height)
-      } else {
-        val tmpHeight = math.min(height - (((x - xs(index)).abs + (y - ys(index)).abs)), 0)
-        if (tmpHeight != hs(index)) {
-          flg = false
-        }
+    val notZeroIndex: Int = hs.indexWhere(h => h != 0L)
+    val H = hs(notZeroIndex) + ((x - xs(notZeroIndex)).abs + (y - ys(notZeroIndex)).abs)
+    while (index < n) {
+      val tmpHeight = math.max((H - (((x - xs(index)).abs + (y - ys(index)).abs))), 0) // ここの条件読み間違えてたかも。。
+      if (tmpHeight != hs(index)) {
+        return (false, -1)
       }
       index += 1
     }
 
-    (flg, height)
+    (true, H)
   }
 
 }
