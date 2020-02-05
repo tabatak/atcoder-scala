@@ -2,7 +2,7 @@ package abc118.c
 
 object Main {
   def main(args: Array[String]): Unit = {
-    solve
+    solve2
   }
 
   def solve(): Unit = {
@@ -29,4 +29,25 @@ object Main {
     }
     println(as.find(_ != 0).get)
   }
+
+  def solve2(): Unit = {
+    val sc = new java.util.Scanner(System.in)
+    val n = sc.nextInt
+    val as = new Array[Long](n)
+    for (i <- 0 until n) {
+      as(i) = sc.nextLong
+    }
+
+    var ans = as(0)
+    for (i <- 1 until n) {
+      ans = gcd(ans, as(i))
+    }
+    println(ans)
+  }
+
+  def gcd(x: Long, y: Long): Long = {
+    if (x == 0) y
+    else gcd(y % x, x)
+  }
+
 }
