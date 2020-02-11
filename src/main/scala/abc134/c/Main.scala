@@ -5,7 +5,6 @@ object Main {
     solve
   }
 
-
   def solve(): Unit = {
     val sc = new java.util.Scanner(System.in)
     val n = sc.nextInt
@@ -19,16 +18,18 @@ object Main {
     val first = a.max
     val second = if (a.count(_ != first) == 0) first else a.filter(_ != first).max
     val multiMaxFlg = a.count(_ == first) > 1
+    val pw = new java.io.PrintWriter(System.out)
     for (i <- 0 until n) {
       if (a(i) == first) {
         if (multiMaxFlg) {
-          println(first)
+          pw.println(first)
         } else {
-          println(second)
+          pw.println(second)
         }
       } else {
-        println(first)
+        pw.println(first)
       }
     }
+    pw.flush()
   }
 }
