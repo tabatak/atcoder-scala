@@ -19,17 +19,23 @@ object Main {
       val a = sortedL(i)
       val b = sortedL(j)
 
-      var flg = true
-      var k = n - 1
-      while (flg && k >= j + 1) {
-        val c = sortedL(k)
-        if (c < a + b) {
-          flg = false
-        } else {
-          k -= 1
-        }
+      val k = sortedL.lastIndexWhere(_ < a + b, n - 1)
+      if (k > 0) {
+        count += k - j
       }
-      count += k - j
+
+      // 解説見る前の回答↓
+      //      var flg = true
+      //      var k = n - 1
+      //      while (flg && k >= j + 1) {
+      //        val c = sortedL(k)
+      //        if (c < a + b) {
+      //          flg = false
+      //        } else {
+      //          k -= 1
+      //        }
+      //      }
+      //      count += k - j
     }
     println(count)
   }
