@@ -8,6 +8,7 @@ object Main {
   def solve(): Unit = {
     val sc = new java.util.Scanner(System.in)
     val a, b, x = sc.nextLong
+    val maxNum = 1000000000L
 
     def binarySearch(l: Long, r: Long): Long = {
       val mid = (l + r) / 2
@@ -23,17 +24,14 @@ object Main {
     }
 
     def checkCost(n: Long): Boolean = {
-      if (n == 0) false
+      if (n == 0) true
       else a * n + b * n.toString.length <= x
     }
 
-    if (checkCost(1000000000L)) {
-      println(1000000000L)
+    if (checkCost(maxNum)) {
+      println(maxNum)
     } else {
-      println(binarySearch(0, 1000000000L))
+      println(binarySearch(0, maxNum))
     }
-
-
   }
 }
-
