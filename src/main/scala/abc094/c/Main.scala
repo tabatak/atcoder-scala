@@ -1,7 +1,5 @@
 package abc094.c
 
-import scala.math.max
-
 object Main {
   def main(args: Array[String]): Unit = {
     solve
@@ -9,16 +7,22 @@ object Main {
 
   def solve(): Unit = {
     val sc = new java.util.Scanner(System.in)
-    val a, b, c = sc.nextInt
-
-    val mx = max(max(a, b), c)
-    val m = if (3 * mx % 2 == (a + b + c) % 2) {
-      mx
-    } else {
-      mx + 1
+    val n = sc.nextInt
+    val x = new Array[Long](n)
+    for (i <- 0 until n) {
+      x(i) = sc.nextLong()
     }
-
-    val ans = ((3 * m) - (a + b + c)) / 2
-    println(ans)
+    val sortedX = x.sorted
+    val medLeft = sortedX(n / 2 - 1)
+    val medRight = sortedX(n / 2)
+    val pw = new java.io.PrintWriter(System.out)
+    for (i <- 0 until n) {
+      if (x(i) < medRight) {
+        pw.println(medRight)
+      } else {
+        pw.println(medLeft)
+      }
+    }
+    pw.flush()
   }
 }
