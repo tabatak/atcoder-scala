@@ -1,7 +1,5 @@
 package abc089.c
 
-import scala.collection.mutable
-
 object Main {
   def main(args: Array[String]): Unit = {
     solve
@@ -12,22 +10,22 @@ object Main {
     val n = sc.nextInt
     sc.nextLine()
     val s = new Array[String](n)
-    val mp = scala.collection.mutable.Map[Char, Int]()
+    val mp = scala.collection.mutable.Map[Char, Long](
+      ('M', 0), ('A', 0), ('R', 0), ('C', 0), ('H', 0))
     for (i <- 0 until n) {
       s(i) = sc.nextLine()
       val index = s(i)(0)
       if (index == 'M' || index == 'A' || index == 'R' || index == 'C' || index == 'H') {
-        if (!mp.contains(index)) {
-          mp.put(index, 1)
-        }
-        else {
-          mp(index) += 1
-        }
+        mp(index) += 1
       }
     }
-    // 5から3つえらぶ
-    val keyNum = mp.keys.size
-    println(keyNum)
 
+    var ans = 0L
+    val values = mp.values.toList
+    for (i <- 0 until 5; j <- i + 1 until 5; k <- j + 1 until 5) {
+      ans += values(i) * values(j) * values(k)
+    }
+
+    println(ans)
   }
 }
