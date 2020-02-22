@@ -13,6 +13,8 @@ object Main {
       nums(sc.nextInt() - 1) += 1
     }
 
-    println(nums.filter(_ != 0).sorted.dropRight(k).sum)
+    // filterを減らしてみたら、むしろ遅くなった、、、 864ms -> 904ms
+    println(nums.sorted.dropRight(k).sum)
+//    println(nums.filter(_ != 0).sorted.dropRight(k).sum)
   }
 }
