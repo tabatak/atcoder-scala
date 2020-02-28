@@ -13,10 +13,10 @@ object Main {
     val s = tmp.split(" ")(0)
     val t = tmp.split(" ")(1)
 
-    val str = new Array[Char](2 * n)
-    for (i <- 0 until str.size) {
-      if (i % 2 == 0) str(i) = s(i / 2)
-      else str(i) = t(i / 2)
+    var str = ""
+    for (i <- 0 until n) {
+      str += s(i)
+      str += t(i)
     }
     println(str.mkString(""))
   }
