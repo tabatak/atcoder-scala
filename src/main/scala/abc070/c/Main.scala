@@ -22,13 +22,7 @@ object Main {
   }
 
   def lcm(x: Long, y: Long): Long = {
-    if (x % y == 0) {
-      x
-    } else if (y % x == 0) {
-      y
-    } else {
-      x / gcd(x, y) * y
-    }
+    x / gcd(x, y) * y
   }
 
   def gcd(x: Long, y: Long): Long = {

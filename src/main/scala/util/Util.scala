@@ -5,6 +5,10 @@ object Util {
   val DI = Array(-1, 0, 1, 0)
   val DJ = Array(0, -1, 0, 1)
 
+  def lcm(x: Long, y: Long): Long = {
+    // 先にgcdで割るとあふれる可能性が下がる
+    x / gcd(x, y) * y
+  }
 
   def gcd(x: Long, y: Long): Long = {
     if (x == 0) y
@@ -41,10 +45,10 @@ object Util {
 
 
   //  val pw = new java.io.PrintWriter(System.out)
-//  pw.println(operations.size)
-//  for (operation <- operations) {
-//    pw.println(operation)
-//  }
-//  pw.flush()
+  //  pw.println(operations.size)
+  //  for (operation <- operations) {
+  //    pw.println(operation)
+  //  }
+  //  pw.flush()
 
 }
