@@ -43,6 +43,15 @@ object Util {
     x * modpow(y, mod - 2, mod) % mod
   }
 
+  def modfactrial(n: Int, mod: Long): Long = {
+    var result = 1L
+    for (i <- 1 to n) {
+      result = (result * i.toLong) % mod
+    }
+
+    return result
+  }
+
 
   //  val pw = new java.io.PrintWriter(System.out)
   //  pw.println(operations.size)
