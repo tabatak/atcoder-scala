@@ -1,6 +1,6 @@
 package abc158.e
 
-import scala.io.StdIn.readLine
+import scala.io.StdIn._
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -8,28 +8,36 @@ object Main {
   }
 
   def solve(): Unit = {
-    val tmp = readLine()
-    val n = tmp.split(" ")(0).toInt
-    val p = tmp.split(" ")(1).toLong
-    val s = readLine
+    val input = readLine().split(" ")
+    val n = input(0).toInt
+    val p = input(1).toInt
+    val s = readLine.toCharArray
 
-    var ans = 0
-    val mp = scala.collection.mutable.Set[String]()
-    for (i <- 0 until n) {
-      for (j <- i + 1 until n + 1) {
-        val str = s.substring(i, j)
-        if (mp.contains(str)) {
-          ans += 1
-        } else {
-          val t = BigDecimal(str)
-          if (t % p == 0) {
-            mp.add(str)
-            ans += 1
-          }
+    if (10 % p == 0) {
+      var ans = 0L
+      for (i <- 0 until n) {
+        if ((s(i) - '0') % p == 0) {
+          ans += i + 1
         }
       }
-    }
-    println(ans)
-  }
+      println(ans)
 
+    } else {
+      val d = new Array[Int](n + 1)
+      var ten = 1
+      for (i <- n - 1 to 0 by -1) {
+        val a = (s(i) - '0') * ten % p
+        d(i) = (d(i + 1) + a) % p
+        ten = ten * 10 % p
+      }
+
+      var ans = 0L
+      val count = new Array[Long](p)
+      for (i <- n to 0 by -1) {
+        ans += count(d(i))
+        count(d(i)) += 1
+      }
+      println(ans)
+    }
+  }
 }
